@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="GIF" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Access1" project="ClassTest2_OOp" file="/ClassTest2_OOp/src/Access1.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="104" x="41" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="AccessMain" project="ClassTest2_OOp" file="/ClassTest2_OOp/src/AccessMain.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="113" x="628" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="PrivateChild" project="ClassTest2_OOp" file="/ClassTest2_OOp/src/PrivateMain.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="93" x="185" y="549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="PrivateMain" project="ClassTest2_OOp" file="/ClassTest2_OOp/src/PrivateMain.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="113" x="327" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="PrivateParent" project="ClassTest2_OOp" 
+    file="/ClassTest2_OOp/src/PrivateParent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="102" x="185" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="ProtectedEx" project="ClassTest2_OOp" file="/ClassTest2_OOp/src/ProtectedEx.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="108" x="480" y="356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="ProtectedMain" project="ClassTest2_OOp" 
+    file="/ClassTest2_OOp/src/ProtectedMain.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="592" y="605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="java.lang.Object" project="ClassTest" 
+    file="C:/tool/eclipse-jee-2020-12-R-win32-x86_64/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_15.0.1.v20201027-0507/jre/lib/jrt-fs.jar" 
+    binary="true" corner="BOTTOM_RIGHT">    
+    <position height="279" width="138" x="327" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="ProtectedTest" project="ClassTest2_OOp" 
+    file="/ClassTest2_OOp/src/ProtectedTest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="108" x="741" y="151"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
