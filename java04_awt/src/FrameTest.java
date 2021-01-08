@@ -6,7 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-
+// 깃허브테스트
 public class FrameTest {
 	//객체를 이용한 컨테이너 생성
 	Frame frm = new Frame();
