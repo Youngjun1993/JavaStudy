@@ -63,7 +63,9 @@ public class MainClass {
 	// 전체메뉴
 	public void adminMenu() {
 		Out:do {
+			System.out.println("===================================================");
 			String index = msg("회원조회(1), 회원등록(2), 회원수정(3), 회원삭제(4), 종료(아무키)");
+			System.out.println("===================================================");
 			switch(index) {
 				case "1":
 					//회원조회 메소드 호출
