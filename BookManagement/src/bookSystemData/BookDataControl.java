@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+import userSystemData.UserDataControl;
+import userSystemData.UserLogin;
+
 public class BookDataControl{
 	public Scanner scan = new Scanner(System.in);
 	int bookIndex = 4;
@@ -83,17 +86,17 @@ public class BookDataControl{
 			}
 		}
 	}
-	// 회원삭제
-		public void bookDel() {
-			bookConsole();
-			String key = msg("- 삭제할 회원번호를 입력하세요");
-			BookVO vo = BookDataSet.bookData.get(key);
-			if(vo == null) {
-				System.out.println("★★★존재하지않는 회원번호입니다.★★★");
-			}
-			else {
-				BookDataSet.bookData.remove(key);
-				System.out.println("삭제가 완료되었습니다:D");
-			}
+	// 목록삭제
+	public void bookDel() {
+		bookConsole();
+		String key = msg("- 삭제할 순번을 입력하세요");
+		BookVO vo = BookDataSet.bookData.get(key);
+		if(vo == null) {
+			System.out.println("★★★존재하지않는 순번입니다.★★★");
 		}
+		else {
+			BookDataSet.bookData.remove(key);
+			System.out.println("삭제가 완료되었습니다:D");
+		}
+	}
 }

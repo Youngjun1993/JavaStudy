@@ -3,9 +3,9 @@ package adminSystemData;
 import java.util.Iterator;
 import java.util.Set;
 
-import bookSystemData.BookDataControl;
+import userSystemData.UserDataControl;
 
-public class AdminDataControl extends BookDataControl{
+public class AdminDataControl extends UserDataControl{
 	int NoIndex = 6;
 	public AdminDataControl() {}
 	
