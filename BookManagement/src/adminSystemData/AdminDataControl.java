@@ -58,7 +58,7 @@ public class AdminDataControl extends UserDataControl{
 						vo.setUserName(editUserName);
 					}else if(editIdx.equals("2")) {
 						String editUserTel = msg("수정될 연락처를 입력하세요.");
-						vo.setUserAddr(editUserTel);
+						vo.setUserTel(editUserTel);
 					}else if(editIdx.equals("3")) {
 						String editUserAddr = msg("수정될 주소를 입력하세요.");
 						vo.setUserAddr(editUserAddr);
