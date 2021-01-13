@@ -76,6 +76,7 @@ public class MainClass extends JFrame implements ActionListener{
 		Object obj = ae.getSource();
 		String emp = "";
 		int result = 0;
+		//7번 버튼, 8번 버튼, 더하기 처리까지만 구현했습니다....
 		if(obj == btn7) {
 			textAr.append(btn7.getText());
 			al.add(btn7.getText());
