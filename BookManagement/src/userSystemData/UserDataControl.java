@@ -12,7 +12,7 @@ public class UserDataControl extends BookDataControl{
 	UserVO uVO = new UserVO("","","","",0,0);
 	String key;
 	int bookCnt=0;
-	int bookCntAdmin = 0;
+	int bookCntPut=0;
 	public UserDataControl() {
 	
 	}
@@ -22,9 +22,13 @@ public class UserDataControl extends BookDataControl{
 		key = msg("- 구매할 순번을 입력하세요");
 		if(UserDataSet.userData.get(key) == null) {
 			bookCnt=0;
+			bookCnt++;
+			uVO.setBookCntUser(bookCnt);
+			
+		}else if(UserDataSet.userData.get(key) != null) {
+			uVO.setBookCntUser(UserDataSet.userData.get(key).getBookCntUser()+1);
 		}
-		bookCnt++;
-		
+		//bookCntPut = bookCnt;
 		BookVO vo = BookDataSet.bookData.get(key);
 		bVO = vo;
 		if(vo == null) {
@@ -33,7 +37,6 @@ public class UserDataControl extends BookDataControl{
 		else {
 			int num = BookDataSet.bookData.get(key).getBookCnt()-1;
 			BookDataSet.bookData.get(key).setBookCnt(num);
-			uVO.setBookCntUser(bookCnt);
 			
 			UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
 			System.out.println("구매가 완료되었습니다:D");
@@ -44,10 +47,13 @@ public class UserDataControl extends BookDataControl{
 		bookConsole();
 		key = msg("- 구매할 순번을 입력하세요");
 		if(UserDataSet.userData.get(key) == null) {
-			bookCntAdmin=0;
 			bookCnt=0;
+			bookCnt++;
+			uVO.setBookCntUser(bookCnt);
+			
+		}else if(UserDataSet.userData.get(key) != null) {
+			uVO.setBookCntUser(UserDataSet.userData.get(key).getBookCntUser()+1);
 		}
-		bookCnt++;
 		BookVO vo = BookDataSet.bookData.get(key);
 		bVO = vo;
 		if(vo == null) {
@@ -56,7 +62,6 @@ public class UserDataControl extends BookDataControl{
 		else {
 			int num = BookDataSet.bookData.get(key).getBookCnt()-1;
 			BookDataSet.bookData.get(key).setBookCnt(num);
-			uVO.setBookCntUser(bookCnt);
 			
 			UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
 			System.out.println("구매가 완료되었습니다:D");
@@ -66,14 +71,15 @@ public class UserDataControl extends BookDataControl{
 	public void bookReturn() {
 		userConsole();
 		String key = msg("- 반납할 순번을 입력하세요");
-		UserVO vo = UserDataSet.userData.get(key);
+		BookVO vo = BookDataSet.bookData.get(key);
+		bVO = vo;
 		if(vo == null) {
 			System.out.println("★★★대여내역이 존재하지않거나 순번을 잘못입력했습니다.★★★");
-		}else {
+		}else{
 			int num = BookDataSet.bookData.get(key).getBookCnt()+1;
 			BookDataSet.bookData.get(key).setBookCnt(num);
-			bookCnt--;
-			uVO.setBookCntUser(bookCnt);
+			uVO.setBookCntUser(UserDataSet.userData.get(key).getBookCntUser()-1);
+			
 			UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
 			System.out.println("반납이 완료되었습니다:D");
 		}
@@ -83,7 +89,7 @@ public class UserDataControl extends BookDataControl{
 		if(bVO == null) {
 			System.out.println("★★★보유내역이 존재하지 않습니다.★★★");
 		}else {
-			UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
+			//UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
 			
 			Set<String> dataList = UserDataSet.userData.keySet();
 			Iterator<String> ii = dataList.iterator();
