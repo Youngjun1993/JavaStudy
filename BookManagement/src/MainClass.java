@@ -173,7 +173,7 @@ public class MainClass extends AdminDataControl{
 					//도서대여
 					System.out.println("");
 					System.out.println("◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈ 도   서   대   여 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈");
-					bookBorrow();
+					bookRent();
 					break;
 				case "4":
 					//도서반납

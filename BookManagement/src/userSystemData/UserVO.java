@@ -6,17 +6,16 @@ public class UserVO {
 	private String writerUser;
 	private String companyUser;
 	private int priceUser;
-	private int bookCntUser;
+	private int bookCntUser = 0;
 	private int bookCntadmin = 0;
 	public UserVO(String idxUser, String bookNameUser, String writerUser, String companyUser, 
-			int priceUser, int bookCntUser, int bookCntadmin) {
+			int priceUser, int bookCntUser) {
 		this.idxUser = idxUser;
 		this.bookNameUser = bookNameUser;
 		this.writerUser = writerUser;
 		this.companyUser = companyUser;
 		this.priceUser = priceUser;
 		this.bookCntUser = bookCntUser;
-		this.bookCntadmin = bookCntadmin;
 	}
 	public int getBookCntadmin() {
 		return bookCntadmin;
