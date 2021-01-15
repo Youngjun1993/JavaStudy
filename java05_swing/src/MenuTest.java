@@ -1,14 +1,19 @@
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MenuTest extends JFrame implements ActionListener{
 	JTextArea ta = new JTextArea();
@@ -57,9 +64,14 @@ public class MenuTest extends JFrame implements ActionListener{
 	//배열보다 모델을 사용해 데이터 담는다.
 	DefaultComboBoxModel<Integer> fontSizeModel = new DefaultComboBoxModel<Integer>();
 	
+	//글꼴
+	JComboBox<String> fontName = new JComboBox<String>();
 	
+	String textBuffer;		
+	//Font 관련기능
+	int bold = 0, italic = 0;
+	Font fnt = new Font("굴림체",0,14);
 	
-	String textBuffer;			
 	public MenuTest() {
 		super("메모장");
 		add(sp);
@@ -82,7 +94,7 @@ public class MenuTest extends JFrame implements ActionListener{
 			editor.add(editplusMenuItem);
 		runMenu.add(compileMenuItem);
 		mb.add(runMenu);
-		
+		//메뉴바 만들기
 		setJMenuBar(mb);
 		
 		//툴바
@@ -92,19 +104,29 @@ public class MenuTest extends JFrame implements ActionListener{
 		tb.addSeparator();
 		tb.add(boldBtn);
 		tb.add(italicBtn);
-		add(BorderLayout.NORTH, tb);
 		
 		//글자크기 반복문
 		for(int i=8; i<=70; i+=3) {
 			fontSizeModel.addElement(i);
 		}
 		fontSize.setModel(fontSizeModel);
+		fontSize.setSelectedItem(14); // 초기 글자 크기
 		tb.add(fontSize);
+		add(BorderLayout.NORTH, tb);
+		
+		// 윈도우 운영체제의 글꼴 얻어오기
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		String [] fntList = ge.getAvailableFontFamilyNames();
+		fontName = new JComboBox<String>(fntList);
+		fontName.setSelectedItem("굴림체");
+		tb.add(fontName);
+		
+		ta.setFont(fnt);
 		
 		//단축키 설정
 		setShortCut();
 		
-		setSize(500,500);
+		setSize(1000,1000);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		//메뉴를 이벤트 등록
@@ -122,39 +144,112 @@ public class MenuTest extends JFrame implements ActionListener{
 		editplusMenuItem.addActionListener(this);
 		compileMenuItem.addActionListener(this);
 		
+		// 툴바
 		newBtn.addActionListener(this);
 		openBtn.addActionListener(this);
 		saveBtn.addActionListener(this);
 		boldBtn.addActionListener(this);
 		italicBtn.addActionListener(this);
+		fontSize.addActionListener(this);
+		fontName.addActionListener(this);
 	}
+	//							JMenuItem, JButton, JComboBox를 매개변수에 받아낸다
 	public void actionPerformed(ActionEvent ae) {
 		//메뉴 인식
 		String eventMenu = ae.getActionCommand();
-		//버튼 인식
+		//버튼 인식, getSource:컴퍼넌스 구별없이 객체를 구해주는 메소드
 		Object eventObj = ae.getSource();
+		//이벤트가 발생한 객체가 어떤 클래스로 생성된 것인지 확인
+		//객체A와 객체B가 같은지 boolean으로 리턴해주는 예약어 : instanceof
+		if(eventObj instanceof JMenuItem) {
+			if(eventMenu.equals("열기")) {
+				fileopen();
+			}else if(eventMenu.equals("종료")) {
+				System.exit(0);
+			}else if(eventMenu.equals("오려두기")){
+				setCut();
+			}else if(eventMenu.equals("붙여넣기")) {
+				setPaste();
+			}else if(eventMenu.equals("복사하기")) {
+				setCopy();
+			}else if(eventMenu.equals("메모장")) {
+				startRuntime("notepad.exe");
+			}else if(eventMenu.equals("크롬")) {
+				//크롬 브라우저로 해당 도메인주소로 접속하기
+				startRuntime("C://Program Files/Google/Chrome/Application/chrome.exe https://www.nate.com");
+				//크롬 브라우저 실행하기
+				//startRuntime("C://Program Files (x86)/Google/Chrome/Application/chrome.exe");
+			}else if(eventMenu.equals("에디트플러스")) {
+				//에디트 플러스 실행하기
+				startRuntime("C://Program Files/EditPlus/editplus.exe");
+			}else if(eventObj == boldBtn) {
+				Font fnt = new Font("궁서체", Font.BOLD, 20);
+				ta.setFont(fnt);
+			}
+		}else if(eventObj instanceof JButton) {
+			if(eventObj == boldBtn) {
+				if(bold == 0) {
+					bold = 1;
+				}else {
+					bold = 0;
+				}
+				fnt = new Font((String)fontName.getSelectedItem(),bold+italic,(Integer)fontSize.getSelectedItem());
+				ta.setFont(fnt);
+			}else if(eventObj == italicBtn) {
+				if(italic==0) italic=2;
+				else italic=0;
+				fnt = new Font((String)fontName.getSelectedItem(),bold+italic,(Integer)fontSize.getSelectedItem());
+				ta.setFont(fnt);
+			}else if(eventObj == openBtn) {
+				fileopen();
+			}
+		}else if(eventObj instanceof JComboBox) {
+			if(eventObj == fontSize || eventObj == fontName) {
+				fnt = new Font((String)fontName.getSelectedItem(),bold+italic,(Integer)fontSize.getSelectedItem());
+				ta.setFont(fnt);
+			}
+		}
+	}
+	// 파일열기
+	public void fileopen() {
+		File f = new File("D://SAMPLE");
+		JFileChooser fc = new JFileChooser();//파일 탐색기\
+		// 여러파일을 선택할 수 있도록 설정
+		fc.setMultiSelectionEnabled(true); // true : 다중선택, false : 단일선택(디폴트값)
 		
-		if(eventMenu.equals("종료")) {
-			System.exit(0);
-		}else if(eventMenu.equals("오려두기")){
-			setCut();
-		}else if(eventMenu.equals("붙여넣기")) {
-			setPaste();
-		}else if(eventMenu.equals("복사하기")) {
-			setCopy();
-		}else if(eventMenu.equals("메모장")) {
-			startRuntime("notepad.exe");
-		}else if(eventMenu.equals("크롬")) {
-			//크롬 브라우저로 해당 도메인주소로 접속하기
-			startRuntime("C://Program Files (x86)/Google/Chrome/Application/chrome.exe https://www.nate.com");
-			//크롬 브라우저 실행하기
-			//startRuntime("C://Program Files (x86)/Google/Chrome/Application/chrome.exe");
-		}else if(eventMenu.equals("에디트플러스")) {
-			//에디트 플러스 실행하기
-			startRuntime("C://Program Files/EditPlus/editplus.exe");
-		}else if(eventObj == boldBtn) {
-			Font fnt = new Font("궁서체", Font.BOLD, 20);
-			ta.setFont(fnt);
+		// 필터 설정
+		//						화면에 나오는 글자, 확장자
+		FileFilter ff1 = new FileNameExtensionFilter("이미지", "jpg", "jpeg", "gif", "png", "bmp");
+		fc.addChoosableFileFilter(ff1);
+		
+		FileFilter ff2 = new FileNameExtensionFilter("java","java","JAVA","Java");
+		fc.addChoosableFileFilter(ff2);
+		
+		// 0:열기, 1:취소
+		int state = fc.showOpenDialog(this);//파일탐색기 열림.
+		if(state == 0) {
+			try {
+				ta.setText("");//원래 있는 컨텐츠 삭제
+				//File selFile = fc.getSelectedFile(); 단일선택
+				File selFile[] = fc.getSelectedFiles(); // 다중선택(배열사용)
+				for(File s : selFile) {
+					FileReader fr = new FileReader(s);
+					BufferedReader br = new BufferedReader(fr);
+					while(true) {
+						// bufferedreader 한줄 읽기(데이터가 없을때까지 반복)
+						String inData = br.readLine();
+						if(inData==null) {
+							break;
+						}
+						//한줄 추가 후 엔터
+						ta.append(inData+"\n");
+					}//while
+					ta.append("----------------------------------------------------\n");
+				}//for
+			}catch(Exception e) {
+				System.out.println("파일열기 에러 발생....");
+				e.printStackTrace();
+			}
 		}
 	}
 	//외부 실행형 파일 구현

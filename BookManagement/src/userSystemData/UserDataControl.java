@@ -45,7 +45,7 @@ public class UserDataControl extends BookDataControl{
 	// 도서대여
 	public void bookRent() {
 		bookConsole();
-		key = msg("- 구매할 순번을 입력하세요");
+		key = msg("- 대여할 순번을 입력하세요");
 		if(UserDataSet.userData.get(key) == null) {
 			bookCnt=0;
 			bookCnt++;
@@ -64,7 +64,7 @@ public class UserDataControl extends BookDataControl{
 			BookDataSet.bookData.get(key).setBookCnt(num);
 			
 			UserDataSet.userData.put(bVO.getIdx(), new UserVO(bVO.getIdx(), bVO.getBookName(),bVO.getWriter(), bVO.getCompany(), bVO.getPrice(), uVO.getBookCntUser()));
-			System.out.println("구매가 완료되었습니다:D");
+			System.out.println("대여가 완료되었습니다:D");
 		}
 	}
 	// 도서반납
