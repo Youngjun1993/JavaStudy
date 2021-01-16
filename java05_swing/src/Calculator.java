@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Calculator extends JFrame implements ActionListener{
-	Font fnt = new Font("Arial", Font.BOLD, 20);
+	Font fnt = new Font("돋움", Font.BOLD, 20);
 	
 	//JFrame - North
 	JTextField resultTf = new JTextField("0.0");
