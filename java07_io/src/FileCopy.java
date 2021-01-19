@@ -1,13 +1,16 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.Serializable;
+//직렬화를 하여 객체를 파일로 저장하도록 한다.(serializable 상속)
+public class FileCopy implements Serializable{
 
-public class fileCopy {
-
-	public fileCopy() {
+	public FileCopy() {
+	}
+	public void start() {
 		try {		
 			//파일복사
-			File srcFile = new File("D://common.jpg");
+			File srcFile = new File("D://실행결과.PNG");
 			File tarFile = new File("D://io", srcFile.getName());
 			
 			FileInputStream fi = new FileInputStream(srcFile);
@@ -26,9 +29,8 @@ public class fileCopy {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		new fileCopy();
-	}
+//	public static void main(String[] args) {
+//		new fileCopy();
+//	}
 
 }

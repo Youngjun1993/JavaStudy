@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
@@ -71,6 +73,9 @@ public class MenuTest extends JFrame implements ActionListener{
 	//Font 관련기능
 	int bold = 0, italic = 0;
 	Font fnt = new Font("굴림체",0,14);
+	
+	//현재 작업중인 파일객체
+	File nowFile;
 	
 	public MenuTest() {
 		super("메모장");
@@ -162,8 +167,12 @@ public class MenuTest extends JFrame implements ActionListener{
 		//이벤트가 발생한 객체가 어떤 클래스로 생성된 것인지 확인
 		//객체A와 객체B가 같은지 boolean으로 리턴해주는 예약어 : instanceof
 		if(eventObj instanceof JMenuItem) {
-			if(eventMenu.equals("열기")) {
+			if(eventMenu.equals("새문서")) {
+				newFile();
+			}else if(eventMenu.equals("열기")) {
 				fileopen();
+			}else if(eventMenu.equals("저장")){
+				fileSave();
 			}else if(eventMenu.equals("종료")) {
 				System.exit(0);
 			}else if(eventMenu.equals("오려두기")){
@@ -202,6 +211,10 @@ public class MenuTest extends JFrame implements ActionListener{
 				ta.setFont(fnt);
 			}else if(eventObj == openBtn) {
 				fileopen();
+			}else if(eventObj == newBtn) {
+				newFile();
+			}else if(eventObj == saveBtn) {
+				fileSave();
 			}
 		}else if(eventObj instanceof JComboBox) {
 			if(eventObj == fontSize || eventObj == fontName) {
@@ -210,9 +223,58 @@ public class MenuTest extends JFrame implements ActionListener{
 			}
 		}
 	}
+	//새문서
+	public void newFile() {
+		nowFile = null; //작업문서객체 초기화
+		ta.setText("");
+		setTitle("메모장");
+	}
+	//파일저장
+	public void fileSave() {
+		if(nowFile==null) { //새문서를 작성 후 저장한다.
+			JFileChooser fc = new JFileChooser();
+			
+			int state = fc.showSaveDialog(fc); // save = 0, cancle = 1
+			if(state == 0) {//저장 버튼 선택시
+				//선택한 드라이브명, 경로, 파일명
+				File f = fc.getSelectedFile();
+				//글내용
+				String str = ta.getText();
+				//중복된이름
+				if(f.exists()) { //파일이 있는지 확인(return boolean)
+					JOptionPane.showMessageDialog(this, "이미존재하는 파일명입니다.\n 저장하기가 취소되었습니다.");
+				}else {
+					try {
+						//FileWriter객체
+						FileWriter fw = new FileWriter(f);
+						fw.write(str, 0, str.length());
+						fw.flush();
+						fw.close();
+						
+						nowFile = f;
+						setTitle(f.getPath());
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		}else { //이미 있는 문서를 열어서 수정 후 저장한다.
+			String writeTxt = ta.getText();
+			try {
+				FileWriter fw = new FileWriter(nowFile);
+				// 인덱스 0부터 writeTxt의 길이까지
+				fw.write(writeTxt, 0, writeTxt.length());
+				fw.flush();
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	// 파일열기
 	public void fileopen() {
-		File f = new File("D://SAMPLE");
+		File f = new File("D://io");
 		JFileChooser fc = new JFileChooser();//파일 탐색기\
 		// 여러파일을 선택할 수 있도록 설정
 		fc.setMultiSelectionEnabled(true); // true : 다중선택, false : 단일선택(디폴트값)
@@ -231,10 +293,16 @@ public class MenuTest extends JFrame implements ActionListener{
 			try {
 				ta.setText("");//원래 있는 컨텐츠 삭제
 				//File selFile = fc.getSelectedFile(); 단일선택
-				File selFile[] = fc.getSelectedFiles(); // 다중선택(배열사용)
+				File selFile[] = fc.getSelectedFiles(); // 다중선택(배열사용) 
+				
 				for(File s : selFile) {
+					//현재파일명을 JFrame에 제목으로 설정
+					String path = s.getPath();
+					setTitle(path);
+					nowFile = s;
 					FileReader fr = new FileReader(s);
 					BufferedReader br = new BufferedReader(fr);
+					
 					while(true) {
 						// bufferedreader 한줄 읽기(데이터가 없을때까지 반복)
 						String inData = br.readLine();
@@ -244,7 +312,7 @@ public class MenuTest extends JFrame implements ActionListener{
 						//한줄 추가 후 엔터
 						ta.append(inData+"\n");
 					}//while
-					ta.append("----------------------------------------------------\n");
+					//ta.append("----------------------------------------------------\n");
 				}//for
 			}catch(Exception e) {
 				System.out.println("파일열기 에러 발생....");
