@@ -1,3 +1,4 @@
+// 이영준
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class CalendarJFrame extends JFrame implements ActionListener{
+public class CalendarJFrameEX extends JFrame implements ActionListener{
 	JTextArea taDay = new JTextArea();
 	JTextArea taYear = new JTextArea();
 	JTextArea taMonth = new JTextArea();
@@ -42,7 +43,7 @@ public class CalendarJFrame extends JFrame implements ActionListener{
 	int year=0,month=0;
 	int monthOut=1;
 	
-	public CalendarJFrame(){
+	public CalendarJFrameEX(){
 		super("카렌다");
 		setLayout(new BorderLayout());
 		//달력값 셋팅
@@ -163,7 +164,7 @@ public class CalendarJFrame extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	public static void main(String[] args) {
-		new CalendarJFrame();
+		new CalendarJFrameEX();
 	}
 
 }
