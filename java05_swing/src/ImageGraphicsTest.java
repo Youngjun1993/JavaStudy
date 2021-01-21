@@ -16,12 +16,14 @@ public class ImageGraphicsTest extends JFrame implements ActionListener{
 		JButton btn3 = new JButton("확대그리기");
 		JButton btn4 = new JButton("좌우뒤집기");
 		JButton btn5 = new JButton("상하뒤집기");
+		JButton btn6 = new JButton("일부그리기");
 		
 	MyCanvas mc = new MyCanvas();
 	String selBtn = "";//현재 선택된 버튼의 라벨
 	Image img;
 	public ImageGraphicsTest() {
 		pane.add(btn1); pane.add(btn2); pane.add(btn3); pane.add(btn4); pane.add(btn5);
+		pane.add(btn6);
 		add("North",pane);
 		add("Center",mc);
 		
@@ -34,6 +36,7 @@ public class ImageGraphicsTest extends JFrame implements ActionListener{
 		btn3.addActionListener(this);
 		btn4.addActionListener(this);
 		btn5.addActionListener(this);
+		btn6.addActionListener(this);
 	}
 	public void actionPerformed(ActionEvent ae) {
 		selBtn = ae.getActionCommand();
@@ -65,6 +68,10 @@ public class ImageGraphicsTest extends JFrame implements ActionListener{
 				g.drawImage(img, 0, 0, cW, cH, 0, 0, w, h, this);
 			}else if(selBtn.equals("좌우뒤집기")) {
 				g.drawImage(img, w, 0, 0, h, 0, 0, w, h, this);
+			}else if(selBtn.equals("상하뒤집기")) {
+				g.drawImage(img, 0, 0, w, h, w, h, 0, 0, this);
+			}else if(selBtn.equals("일부그리기")) {
+				g.drawImage(img, 0, 0, 300, 300, 200, 200, 500, 500, this);
 			}
 		}
 	}
