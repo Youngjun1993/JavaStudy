@@ -20,7 +20,7 @@ public class DBConn {
 	ResultSet rs = null;
 	
 	String sql = null;
-	String url = "jdbc:oracle:thin:@192.168.0.32:1521:xe";
+	String url = "jdbc:oracle:thin:@192.168.55.126:1521:xe";
 	String userId = "c##scott";
 	String userPwd = "tiger";
 	

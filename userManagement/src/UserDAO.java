@@ -66,4 +66,85 @@ public class UserDAO extends DBConn {
 		return lst;
 	}
 
+	//회원등록
+	public int memberInsert(UserVO vo) {
+		int result = 0;
+		try {
+			getConn();
+			
+			sql = "insert into member(num, username, tel, addr, email) "
+					+" values(memsq.nextval, ?, ?, ?, ?)";
+		
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUsername());
+			pstmt.setString(2, vo.getTel());
+			pstmt.setString(3, vo.getAddr());
+			pstmt.setString(4, vo.getEmail());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBClose();
+		}
+		return result;
+	}
+	//회원정보수정				번호, 연락처, 이메일, 주소
+	public int memberUpdate(UserVO vo) {
+		int result=0;
+		try {
+			getConn();
+			sql = "update member set tel=?, email=?, addr=? where num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTel());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getAddr());
+			pstmt.setInt(4, vo.getNum());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBClose();
+		}
+		return result;
+	}
+	//회원삭제
+	public int memberDelete(int num) {
+		int result = 0;
+		try {
+			getConn();
+			sql = "delete from member where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBClose();
+		}
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
