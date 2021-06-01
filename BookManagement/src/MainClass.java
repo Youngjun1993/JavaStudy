@@ -45,10 +45,10 @@ public class MainClass extends AdminDataControl{
 				String userId = msg("아이디");
 				String userPwd = msg("패스워드");
 				if(UserLogin.UserLogin(userId, userPwd)) {
+					// 유저 로그인시 실행문
 					System.out.println("★★★유저 로그인 성공★★★");
 					userMenu();
 					break;
-					// 유저 로그인시 실행문
 				}
 				else {
 					System.out.println("★★★아이디 혹은 비밀번호를 잘못입력했습니다.★★★");

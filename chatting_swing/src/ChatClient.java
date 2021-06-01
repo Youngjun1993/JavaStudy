@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 //이영준
 
@@ -59,6 +61,13 @@ public class ChatClient extends JFrame implements ActionListener, Runnable{
 			sendPane.add(sendTf);
 			sendPane.add("East", sendBtn);
 		
+		///////Border ///////////////////
+		LineBorder lineBorder = new LineBorder(Color.GREEN);
+		TitledBorder tBorder = new TitledBorder(lineBorder, "Message", TitledBorder.CENTER, TitledBorder.ABOVE_TOP);
+		
+		centerPane.setBorder(tBorder);
+		/////////////////////////////////
+			
 		//JFrame-East
 		add("East", eastPane);
 			eastPane.add("North",listTitle);
