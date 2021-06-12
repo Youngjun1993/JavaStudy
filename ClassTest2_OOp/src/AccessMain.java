@@ -21,7 +21,7 @@ public class AccessMain {
 		System.out.println("a2.getNum() = "+ a2.getNum());
 		a2.setNum(200);
 		System.out.println("a2.getNum() = " + a2.getNum());
-		a2.setName("강산");
+		a2.setName("영준");
 		System.out.println("a2.getName() = " + a2.getName());
 	}
 	
